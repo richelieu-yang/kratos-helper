@@ -11,9 +11,11 @@ import (
 
 // UseZap
 /*
+PS: 会设置 kratos 的全局logger.
+
 @param zapLogger 可以为nil
 */
-func UseZap(zapLogger *zap.Logger, id, name, version string) {
+func UseZap(zapLogger *zap.Logger, id, name, version string) (logger log.Logger) {
 	if zapLogger == nil {
 		writeSyncer := zapcore.AddSync(os.Stderr)
 		encoderConfig := zap.NewProductionEncoderConfig()
@@ -25,7 +27,7 @@ func UseZap(zapLogger *zap.Logger, id, name, version string) {
 	}
 
 	kLogger := kratoszap.NewLogger(zapLogger)
-	logger := log.With(kLogger,
+	logger = log.With(kLogger,
 		//"ts", log.DefaultTimestamp,
 		"caller", log.DefaultCaller,
 		"trace.id", tracing.TraceID(),
@@ -35,4 +37,5 @@ func UseZap(zapLogger *zap.Logger, id, name, version string) {
 		"service.version", version,
 	)
 	log.SetLogger(logger)
+	return
 }
