@@ -13,9 +13,10 @@ import (
 /*
 PS: 会设置 kratos 的全局logger.
 
-@param zapLogger 可以为nil（将采用默认值）
+@param zapLogger 	可以为nil（将采用默认值）
+@param globalArgs	是否设置为kratos的全局logger？（默认true）
 */
-func UseZap(zapLogger *zap.Logger, id, name, version string) (logger log.Logger) {
+func UseZap(zapLogger *zap.Logger, id, name, version string, globalArgs ...bool) (logger log.Logger) {
 	if zapLogger == nil {
 		writeSyncer := zapcore.AddSync(os.Stderr)
 		encoderConfig := zap.NewProductionEncoderConfig()
@@ -36,6 +37,14 @@ func UseZap(zapLogger *zap.Logger, id, name, version string) (logger log.Logger)
 		"service.name", name,
 		"service.version", version,
 	)
-	log.SetLogger(logger)
+
+	global := true
+	if globalArgs != nil {
+		global = globalArgs[0]
+	}
+	if global {
+		log.SetLogger(logger)
+	}
+
 	return
 }
