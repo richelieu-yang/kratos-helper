@@ -18,8 +18,6 @@ func init() {
 
 // RegisterPprof 注册pprof相关的路由.
 /*
-!!!: 想调用此函数，需要先在 main.go 中匿名导入(import _)此package.
-
 参考了官方example: https://github.com/go-kratos/examples/blob/main/http/pprof/main.go
 */
 func RegisterPprof(s *khttp.Server) {
