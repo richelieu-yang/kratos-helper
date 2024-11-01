@@ -13,7 +13,7 @@ import (
 /*
 PS: 会设置 kratos 的全局logger.
 
-@param zapLogger 可以为nil
+@param zapLogger 可以为nil（将采用默认值）
 */
 func UseZap(zapLogger *zap.Logger, id, name, version string) (logger log.Logger) {
 	if zapLogger == nil {
@@ -28,7 +28,7 @@ func UseZap(zapLogger *zap.Logger, id, name, version string) (logger log.Logger)
 
 	kLogger := kratoszap.NewLogger(zapLogger)
 	logger = log.With(kLogger,
-		//"ts", log.DefaultTimestamp,
+		//"ts", log.DefaultTimestamp, /* Richelieu: zap的日志输出已经有时间戳了，所以此处不再需要时间戳 */
 		"caller", log.DefaultCaller,
 		"trace.id", tracing.TraceID(),
 		"span.id", tracing.SpanID(),
