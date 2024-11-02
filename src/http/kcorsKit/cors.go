@@ -1,7 +1,10 @@
 package kcorsKit
 
-import "github.com/go-kratos/kratos/v2/transport/http"
-import "github.com/gorilla/handlers"
+import (
+	"github.com/go-kratos/kratos/v2/transport/http"
+	"github.com/gorilla/handlers"
+	ghttp "net/http"
+)
 
 func NewCorsServerOption(allowOrigins []string) http.ServerOption {
 	filterFunc := NewCorsFilterFunc(allowOrigins)
@@ -26,5 +29,8 @@ func NewCorsFilterFunc(allowOrigins []string) http.FilterFunc {
 		// 设置允许的请求头
 		handlers.AllowedHeaders([]string{"Content-Type", "Authorization"}),
 		handlers.AllowCredentials(),
+
+		handlers.MaxAge(86400),
+		handlers.OptionStatusCode(ghttp.StatusNoContent),
 	)
 }
