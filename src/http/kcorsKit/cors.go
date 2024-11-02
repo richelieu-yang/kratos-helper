@@ -37,6 +37,7 @@ func NewCorsFilterFunc(allowOrigins []string) http.FilterFunc {
 			e.g.Access-Control-Max-Age: 86400（即 24 小时）
 		*/
 		handlers.MaxAge(86400),
+		/* 预检请求成功，返回状态码204 */
 		handlers.OptionStatusCode(ghttp.StatusNoContent),
 	)
 }
