@@ -21,7 +21,9 @@ func NewCorsFilterFunc(allowOrigins []string) http.FilterFunc {
 		handlers.AllowedOriginValidator(func(s string) bool {
 			return validator.ValidateOrigin(s)
 		}),
-		handlers.AllowedMethods([]string{"GET", "POST"}),
+		// 设置允许的 HTTP 方法
+		handlers.AllowedMethods([]string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}),
+		// 设置允许的请求头
 		handlers.AllowedHeaders([]string{"Content-Type", "Authorization"}),
 		handlers.AllowCredentials(),
 	)
