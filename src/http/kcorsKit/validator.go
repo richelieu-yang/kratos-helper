@@ -85,6 +85,12 @@ func normalize(values []string) []string {
 	normalized := make([]string, 0, len(values))
 	for _, value := range values {
 		value = strings.TrimSpace(value)
+
+		/* Richelieu: 新增"去空" */
+		if value == "" {
+			continue
+		}
+
 		value = strings.ToLower(value)
 		if _, seen := distinctMap[value]; !seen {
 			normalized = append(normalized, value)
