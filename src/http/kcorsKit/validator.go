@@ -15,8 +15,12 @@ type (
 	}
 )
 
+func NewValidator(allowOrigins []string) Validator {
+
+}
+
 func (impl *validatorImpl) ValidateOrigin(origin string) bool {
-	if origin == "" {
+	if impl.allowAll || origin == "" {
 		return true
 	}
 
