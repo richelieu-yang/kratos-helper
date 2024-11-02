@@ -5,10 +5,12 @@ go 1.23
 require (
 	github.com/go-kratos/kratos/contrib/log/zap/v2 v2.0.0-20241031100207-f3c4b23a08df
 	github.com/go-kratos/kratos/v2 v2.8.2
+	github.com/gorilla/handlers v1.5.2
 	go.uber.org/zap v1.27.0
 )
 
 require (
+	github.com/felixge/httpsnoop v1.0.3 // indirect
 	github.com/go-kratos/aegis v0.2.0 // indirect
 	github.com/go-logr/logr v1.4.1 // indirect
 	github.com/go-logr/stdr v1.2.2 // indirect
