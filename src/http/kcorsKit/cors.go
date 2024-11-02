@@ -6,6 +6,10 @@ import (
 	ghttp "net/http"
 )
 
+// NewCorsServerOption
+/*
+PS: 也支持对预检请求(OPTIONS)的处理.
+*/
 func NewCorsServerOption(allowOrigins []string) http.ServerOption {
 	filterFunc := NewCorsFilterFunc(allowOrigins)
 	return http.Filter(filterFunc)
@@ -14,6 +18,8 @@ func NewCorsServerOption(allowOrigins []string) http.ServerOption {
 // NewCorsFilterFunc
 /*
 TODO: [bug] github.com/gorilla/handlers v1.5.2 有点问题: 当收到预检请求且发现跨域，返回的状态码是 200 而非 403（但真正的handler不会触发，无伤大雅），后续看官方会不会处理 || 自己fork并修改.
+
+PS: 也支持对预检请求(OPTIONS)的处理.
 
 @param allowOrigins: 允许的跨域域名 	(1) 支持域名匹配
 									(2) 可以为nil，即都允许（并非通过 "*" 来实现）
