@@ -15,6 +15,7 @@ func TestNewValidator(t *testing.T) {
 		v := NewValidator([]string{"*.baidu.com"})
 		fmt.Println(v.ValidateOrigin("http://www.baidu.com"))  // true
 		fmt.Println(v.ValidateOrigin("https://www.baidu.com")) // true
+		fmt.Println(v.ValidateOrigin("https://nssurge.com"))   // false
 	}
 
 	{
