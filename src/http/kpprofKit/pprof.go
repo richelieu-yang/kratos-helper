@@ -20,6 +20,8 @@ func init() {
 
 // RegisterPprof 注册pprof相关的路由.
 /*
+TODO: 可能会导致bug: 在 http.DefaultServeMux 上自行绑定的路由丢了.
+
 参考了官方example: https://github.com/go-kratos/examples/blob/main/http/pprof/main.go
 */
 func RegisterPprof(s *khttp.Server) {
