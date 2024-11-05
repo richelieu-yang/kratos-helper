@@ -10,6 +10,8 @@ import (
 
 func init() {
 	/*
+		TODO: 可能会导致bug: 在 http.DefaultServeMux 上自行绑定的路由丢了.
+
 		net/http/pprof的 init() 会自动注册一些路由到默认的 HTTP 路由器中.
 		此处代码的目的: 取消这些自动绑定的路由.
 	*/
